@@ -5,47 +5,80 @@
   <meta charset="UTF-8" />
   <title>Sofia Kamli — Приват</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      font-family: 'Playfair Display', serif;
-      background: url('background.jpeg') center center / cover no-repeat fixed;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('background.jpeg') center center / cover no-repeat;
+      z-index: -2;
+      transform: scale(1);
+      animation: zoom 60s ease-in-out infinite alternate;
+    }
+    @keyframes zoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
     }
     .overlay {
-      background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       min-height: 100vh;
+      padding: 0 20px;
     }
     .container {
       max-width: 540px;
       margin: auto;
-      padding: 40px 20px 60px;
+      padding: 50px 0 70px;
       text-align: center;
     }
     h1 {
-      font-size: 30px;
-      color: #e6c5ff;
-      margin-bottom: 16px;
+      font-size: 36px;
+      color: #e6d5ff;
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s forwards;
     }
     .tagline {
-      font-size: 16px;
-      color: #ccc;
-      margin-bottom: 28px;
-      line-height: 1.5;
+      font-size: 17px;
+      color: #d8d8d8;
+      margin-bottom: 34px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s forwards;
+      animation-delay: 0.3s;
     }
     .cta-block {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1);
-      padding: 24px;
+      padding: 28px;
       border-radius: 14px;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s forwards;
+      animation-delay: 0.6s;
     }
     .cta-block h2 {
-      color: #ffd6ff;
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 14px;
+      background: linear-gradient(to right, #f9a6ff, #b987ff, #f9a6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 8s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .cta-block p {
       font-size: 15px;
@@ -62,27 +95,81 @@
       text-decoration: none;
       font-size: 15px;
     }
+    .promo-toggle {
+      margin: 26px auto 0;
+      padding: 12px 24px;
+      font-size: 17px;
+      border: 1px dashed #aaa;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      color: #f2caff;
+      cursor: pointer;
+    }
+    .promo-content {
+      display: none;
+      margin-top: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 22px;
+      color: #f1eaff;
+      font-size: 18px;
+      animation: fadeIn 0.5s ease forwards;
+      word-break: break-word;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+    .promo-content strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 22px;
+      color: #ffffff;
+      background: linear-gradient(to right, #ffffff, #ccc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     footer {
-      margin-top: 50px;
+      margin-top: 60px;
       font-size: 12px;
       color: #888;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s forwards;
+      animation-delay: 1s;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
+  <script>
+    function showPromo() {
+      const promo = document.getElementById("promo");
+      promo.style.display = "block";
+    }
+  </script>
 </head>
 <body>
   <div class="overlay">
     <div class="container">
       <h1>Sofia Kamli</h1>
       <div class="tagline">
-        Приватный доступ к эстетике тела, мотивации, энергии.  
-        Без пошлости, без лишнего. Только суть.  
+        Приватный доступ к эстетике тела, мотивации, энергии.<br />
+        Без пошлости, без лишнего. Только суть.<br />
         Подписка для тех, кто ценит силу, форму и красоту.
       </div>
 
       <div class="cta-block">
         <h2>💎 Доступ — 500 ₽</h2>
-        <p>+ бонус внутри для новых подписчиков</p>
+        <p>Есть секретный промокод? Проверь 👇</p>
         <a href="https://t.me/sonchezmood" target="_blank">Получить доступ</a>
+        <div class="promo-toggle" onclick="showPromo()">🎁 Нажми, чтобы раскрыть промокод</div>
+        <div id="promo" class="promo-content">
+          Используй этот промокод при общении в Telegram:<br />
+          <strong>sofiathebestsexygirl</strong>
+        </div>
       </div>
 
       <footer>
